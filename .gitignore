@@ -1,0 +1,7 @@
+.idea
+*.iml
+*.deb
+
+# Custom extensions to disable versionning manually
+*.dev.*
+*.dev
