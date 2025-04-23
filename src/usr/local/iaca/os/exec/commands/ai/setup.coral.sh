@@ -38,15 +38,18 @@ function install_gasket() {
     apt-get install -y "${TMP_DIR}/${GASKET_PACKAGE}" > /dev/null
 }
 
+function apt_update() {
+    apt-get update > /dev/null
+}
 
 # -----------------------------------------------------------------------------------------------
 
 check_system_arch
-
 init_tmp
 download_gasket || { error "Unable to download gasket-dkms deb file."; dispose_tmp; exit 4; }
-install_gasket || { error "Unable to install gasket-dkms deb file."; dispose_tmp; exit 5; }
+apt_update || { error "Unable to update aptitude."; dispose_tmp; exit 5; }
+install_gasket || { error "Unable to install gasket-dkms deb file."; dispose_tmp; exit 6; }
 dispose_tmp
-save_in_persistent || { error "Unable to save coral installation in persistent file system."; exit 6; }
+save_in_persistent || { error "Unable to save coral installation in persistent file system."; exit 7; }
 
 success "✅ Coral AI support installed."
