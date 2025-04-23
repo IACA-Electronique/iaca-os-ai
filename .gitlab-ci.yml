@@ -1,0 +1,33 @@
+stages:
+  - package
+  - deploy
+
+variables:
+  PROJECT_NAME: iaca-os-docker
+  REPO_PATH: /os/repo/v1
+  PACKAGE_NAME: docker.deb
+
+package:
+  stage: "package"
+  image: iacaelectronique/deb-package-builder
+  only:
+    - tags
+  variables:
+    VERSION: ${CI_COMMIT_REF_NAME}
+  script:
+    - bash scripts/set-version.sh ${VERSION}
+    - chmod -R 0755 src/
+    - dpkg-deb --build src/ ./${PACKAGE_NAME}
+  artifacts:
+    paths:
+      - ${PACKAGE_NAME}
+
+deploy:
+  stage: "deploy"
+  image: alpine:3.12
+  only:
+    - tags
+  before_script:
+    - apk update && apk add sshpass openssh-client bash
+  script:
+    - bash scripts/deploy.sh
