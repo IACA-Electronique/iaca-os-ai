@@ -3,7 +3,7 @@ stages:
   - deploy
 
 variables:
-  PROJECT_NAME: iaca-os-docker
+  PROJECT_NAME: iaca-os-ai
   REPO_PATH: /os/repo/v1
   PACKAGE_NAME: docker.deb
 
