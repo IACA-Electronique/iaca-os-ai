@@ -5,7 +5,7 @@ stages:
 variables:
   PROJECT_NAME: iaca-os-ai
   REPO_PATH: /os/repo/v1
-  PACKAGE_NAME: docker.deb
+  PACKAGE_NAME: ai.deb
 
 package:
   stage: "package"
