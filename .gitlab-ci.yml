@@ -28,6 +28,10 @@ deploy:
   only:
     - tags
   before_script:
+    - export SFTP_HOST=$SFTP_HOST
+    - export SFTP_PASSWORD=$SFTP_PASSWORD
+    - export SFTP_PORT=$SFTP_PORT
+    - export SFTP_USER=$SFTP_USER
     - apk update && apk add sshpass openssh-client bash
   script:
     - bash scripts/deploy.sh
