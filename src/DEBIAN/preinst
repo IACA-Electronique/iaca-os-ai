@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Error codes:
+# 1 - OS COMMIT package is not installed
+# 2 - Unsupported board model
+# 3 - Cannot read board model file
+
+
+# --------------------------------------------------------------------------------------------------------- PARAMETERS
+
+MODEL_FILE="/proc/device-tree/model"
+SUPPORTED_BOARDS=("Raspberry Pi Compute Module 5 Rev 1.0")
+
+# --------------------------------------------------------------------------------------------------------- FUNCTIONS
+
+function check_board_support() {
+    if [ -f "$MODEL_FILE" ]; then
+        BOARD_MODEL=$(cat "$MODEL_FILE" | tr -d '\0')
+        echo "Board model name: $BOARD_MODEL"
+
+        # Check if the board is supported
+        if [[ " ${SUPPORTED_BOARDS[*]} " =~ ${BOARD_MODEL} ]]; then
+            echo "The board is supported."
+        else
+            echo "Error: The board model $BOARD_MODEL is not supported."
+            exit 2
+        fi
+    else
+        echo "File $MODEL_FILE does not exist."
+        exit 3
+    fi
+}
+
+function check_commit_install() {
+    if [ ! -d "/usr/local/iaca/os/exec/commands/commit" ]; then
+        echo "OS COMMIT is required. (try 'os install commit')"
+        exit 1
+    fi
+}
+
+# --------------------------------------------------------------------------------------------------------- MAIN
+
+check_board_support
+check_commit_install

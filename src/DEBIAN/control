@@ -1,0 +1,7 @@
+Package: iaca-os-ai
+Version: 0.1
+Priority: optional
+Architecture: all
+Maintainer: IACA Electronique <julien.faure@iaca-electronique.com>
+Description: IACA OS AI managing command.
+Depends: iaca-os-exec, iaca-os-commit
