@@ -1,0 +1,2 @@
+export CORAL_REPO_URL=https://repo.os.iaca-electronique.com/ai/coral/
+export GASKET_PACKAGE=gasket-dkms.deb

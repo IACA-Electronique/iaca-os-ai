@@ -1,0 +1,11 @@
+Summary
+-------
+Docker IA system.
+
+Usage
+-----
+
+os ai (setup|help)
+    * setup (coral) : Setup AI support (reboot when setup is finish).
+        * coral : Setup Google Coral TPU support (require aarch64)
+    * help (-h, --help) : Show this display.
